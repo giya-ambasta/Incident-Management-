@@ -28,7 +28,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
-                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                     '''
                 }
             }
@@ -43,11 +43,12 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 sh '''
-                    docker stop incident-container || true
-                    docker rm incident-container || true
-                    docker run -d -p 5000:5000 --name incident-container $DOCKER_IMAGE
+                docker rm -f incident-container || true
+                docker rm -f incident-app || true
+                docker run -d -p 5000:5000 --name incident-container $DOCKER_IMAGE
                 '''
             }
         }
+
     }
 }
