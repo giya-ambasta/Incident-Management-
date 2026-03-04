@@ -13,34 +13,20 @@ services:
       - mysql
     restart: always
 
-mysql:
-  image: mysql:8.0
-  container_name: mysql-db
-  restart: always
-  environment:
-    MYSQL_ROOT_PASSWORD: root123
-    MYSQL_DATABASE: pypro
-    MYSQL_USER: pyuser
-    MYSQL_PASSWORD: py123
-  ports:
-    - "3306:3306"
-  volumes:
-    - mysql_data:/var/lib/mysql
-    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: pypro
+      MYSQL_USER: pyuser
+      MYSQL_PASSWORD: py123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
-#   mysql:
-#     image: mysql:8.0
-#     container_name: mysql-db
-#     restart: always
-#     environment:
-#       MYSQL_ROOT_PASSWORD: root123
-#       MYSQL_DATABASE: pypro
-#       MYSQL_USER: pyuser
-#       MYSQL_PASSWORD: py123
-#     ports:
-#       - "3306:3306"
-#     volumes:
-#       - mysql_data:/var/lib/mysql
-
-# volumes:
-#   mysql_data:
+volumes:
+  mysql_data:
