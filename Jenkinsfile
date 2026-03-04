@@ -45,7 +45,13 @@ pipeline {
                 sh '''
                 docker rm -f incident-container || true
                 docker rm -f incident-app || true
-                docker run -d --env-file .env -p 5000:5000 --name incident-container $DOCKER_IMAGE
+                docker run -d -p 5000:5000 \
+                -e DB_HOST=mysql-db \
+                -e DB_PORT=3306 \
+                -e DB_USER=pyuser \
+                -e DB_PASSWORD=py123 \
+                -e DB_NAME=pypro \
+                --name incident-container $DOCKER_IMAGE
                 '''
             }
         }
