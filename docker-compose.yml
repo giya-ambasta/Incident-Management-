@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  app:
+    build: .
+    container_name: incident-app
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: pypro
+      MYSQL_USER: pyuser
+      MYSQL_PASSWORD: py123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
