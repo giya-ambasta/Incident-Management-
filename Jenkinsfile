@@ -45,7 +45,7 @@ pipeline {
                 sh '''
                 docker rm -f incident-container || true
                 docker rm -f incident-app || true
-                docker run -d -p 5000:5000 --name incident-container $DOCKER_IMAGE
+                docker run -d --env-file .env -p 5000:5000 --name incident-container $DOCKER_IMAGE
                 '''
             }
         }
