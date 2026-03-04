@@ -45,7 +45,9 @@ pipeline {
                 sh '''
                 docker rm -f incident-container || true
                 docker rm -f incident-app || true
+
                 docker run -d -p 5000:5000 \
+                --network incident-management-_default \
                 -e DB_HOST=mysql-db \
                 -e DB_PORT=3306 \
                 -e DB_USER=pyuser \
